@@ -6,15 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2019 | Jzzz&#39;s blog</title>
+  <title>UCP编程 | Jzzz&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Jzzz&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/archives/2019/index.html">
+  <meta name="description" content="UDP编程TCP是建立可靠连接，并且通信双方可以以流的形式发送数据。相对TCP,UDP则是面向无连接的协议。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UCP编程">
+<meta property="og:url" content="http://yoursite.com/2019/09/17/UCP编程/index.html">
 <meta property="og:site_name" content="Jzzz&#39;s blog">
+<meta property="og:description" content="UDP编程TCP是建立可靠连接，并且通信双方可以以流的形式发送数据。相对TCP,UDP则是面向无连接的协议。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-09-17T14:04:33.548Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jzzz&#39;s blog">
+<meta name="twitter:title" content="UCP编程">
+<meta name="twitter:description" content="UDP编程TCP是建立可靠连接，并且通信双方可以以流的形式发送数据。相对TCP,UDP则是面向无连接的协议。">
   
     <link rel="alternative" href="/atom.xml" title="Jzzz&#39;s blog" type="application/atom+xml">
   
@@ -150,103 +154,168 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-UCP编程" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      UCP编程
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/17/UCP编程/" class="archive-article-date">
+
+        
+        <a href="/2019/09/17/UCP编程/" class="archive-article-date">
   	<time datetime="2019-09-17T13:28:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-17</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/17/UCP编程/">UCP编程</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="UDP编程"><a href="#UDP编程" class="headerlink" title="UDP编程"></a>UDP编程</h2><p>TCP是建立可靠连接，并且通信双方可以以流的形式发送数据。相对TCP,UDP则是面向无连接的协议。</p>
+<a id="more"></a>
+<p>使用UDP协议时，不需要建立连接，只需要知道对方的IP地址和端口号，就可以直接发数据包。但是能不能到达就不知道了。</p>
+<p>虽然UDP传输数据不可靠，但是与TCP相比，速度快，对于不要求可靠到达的数据，就可以使用UDP协议。</p>
+<p>1.客户端</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import socket</span><br><span class="line"></span><br><span class="line">s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)</span><br><span class="line">for data in [b&apos;jzzz&apos;, b&apos;metoo&apos;, b&apos;zzzj&apos;]:</span><br><span class="line">    # 发送数据</span><br><span class="line">    s.sendto(data, (&apos;127.0.0.1&apos;, 9999))</span><br><span class="line">    # 接收数据</span><br><span class="line">    print(s.recv(1024).decode(&apos;utf-8&apos;))</span><br><span class="line">s.close()</span><br></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
-          
+<p>客户端使用UDP时，首先仍需要创建基于UDP的socket，但不需要调用connect()，直接通过sendto()给服务器发数据。<br>从服务器接收数据仍需调用recv()方法。</p>
+<p>2.服务器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import socket</span><br><span class="line"></span><br><span class="line">s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)</span><br><span class="line"># 绑定端口</span><br><span class="line">s.bind((&apos;127.0.0.1&apos;, 9999))</span><br><span class="line">print(&apos;Bind UDP on 9999...&apos;)</span><br><span class="line">while True:</span><br><span class="line">    # 接收数据</span><br><span class="line">    data, addr = s.recvfrom(1024)</span><br><span class="line">    print(&apos;Received from %s:%s.&apos; % addr)</span><br><span class="line">    s.sendto(b&apos;Hello,%s!&apos; % data, addr)</span><br></pre></td></tr></table></figure>
 
+<p>创建socket时，SOCK_DGRAM指定了这个socket的类型是UDP。绑定端口和TCP一样，但是不需要调用listen()方法，而是直接接收来自任何客户端的数据。<br>recvfrom()方法返回数据和客户端的地址与端口，这样，服务器收到数据后，直接调用sendto()就可以把数据用UDP发给客户端。</p>
+<p>附原文地址: <a href="https://www.liaoxuefeng.com/wiki/1016959663602400/1017790181885952" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/1016959663602400/1017790181885952</a></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/09/17/UCP编程/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/17/TCP编程/" class="archive-article-date">
-  	<time datetime="2019-09-17T12:36:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-17</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/09/17/TCP编程/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">TCP编程</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/17/TCP编程/">TCP编程</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/17/进程和线程的那点事/" class="archive-article-date">
-  	<time datetime="2019-09-17T11:05:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/17/进程和线程的那点事/">进程和线程的那点事</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -269,8 +338,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
