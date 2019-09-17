@@ -174,15 +174,9 @@
       
         <h2 id="TCP编程"><a href="#TCP编程" class="headerlink" title="TCP编程"></a>TCP编程</h2><p>1.客户端</p>
 <p>大多数连接都是可靠的TCP连接。创建TCP连接时，主动发起连接的叫客户端，被动响应连接的叫服务器。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import socket</span><br><span class="line"></span><br><span class="line"># 创建一个socket</span><br><span class="line">s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</span><br><span class="line"># 建立连接</span><br><span class="line">s.connect((&apos;127.0.0.1&apos;, 9999))</span><br><span class="line"># 接收欢迎消息</span><br><span class="line">print(s.recv(1024).decode(&apos;utf-8&apos;))</span><br><span class="line">for data in [b&apos;jzzz&apos;, b&apos;metoo&apos;, b&apos;zzzj&apos;]:</span><br><span class="line">    # 发送数据</span><br><span class="line">    s.send(data)</span><br><span class="line">    # 每次最多接收1K字节</span><br><span class="line">    print(s.recv(1024).decode(&apos;utf-8&apos;))</span><br><span class="line">s.send(b&apos;exit&apos;)</span><br><span class="line"># 关闭连接</span><br><span class="line">s.close()</span><br></pre></td></tr></table></figure>
-
-<p>创建Socket时，AF_INET指定使用IPv4协议，如果要使用IPv6，则指定为AF_INET6。<br>SOCK_STREAM指定使用面向流的TCP协议，这样，一个Socket对象就创建成功了，但是还没有建立连接。</p>
-<p>客户端要主动发起TCP连接，必须知道服务器的IP地址和端口号，127.0.0.1是一个特殊的IP地址，表示本机地址</p>
-<p>2.服务器<br>服务器进程首先要绑定一个端口并监听来自其他客户端的连接。如果某个客户端连接过来了，服务器就该与该客户端建立socket连接，随后通信就靠这个socket连接了。<br>编写一个简单的服务器程序，它接收客户端连接，把客户端发过来的字符串加上Hello再发送回去。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">import socket</span><br><span class="line">import threading</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line">s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</span><br><span class="line"># 监听端口</span><br><span class="line">s.bind((&apos;127.0.0.1&apos;, 9999))</span><br><span class="line"># 调用listen()方法开始监听端口，传入的参数指定等待连接的最大数量</span><br><span class="line">s.listen(5)</span><br><span class="line">print(&apos;Waiting for connection...&apos;)</span><br><span class="line">def tcplink(sock, addr):</span><br><span class="line">    print(&apos;Accept new connection from %s:%s&apos; % addr)</span><br><span class="line">    sock.send(b&apos;Welcome!&apos;)</span><br><span class="line">    while True:</span><br><span class="line">        data = sock.recv(1024)</span><br><span class="line">        time.sleep(1)</span><br><span class="line">        if not data or data.decode(&apos;utf-8&apos;) == &apos;exit&apos;:</span><br><span class="line">            break</span><br><span class="line">        sock.send(b&apos;Hello, %s!&apos; % data.decode(&apos;utf-8&apos;).encode(&apos;utf-8&apos;))</span><br><span class="line">    sock.close()</span><br><span class="line">    print(&apos;Connection from %s:%s closed.&apos; % addr)</span><br><span class="line"></span><br><span class="line">while True:</span><br><span class="line">    # 接受一个新连接</span><br><span class="line">    sock, addr = s.accept()</span><br><span class="line">    # 创建新线程来处理TCP连接</span><br><span class="line">    t = threading.Thread(target=tcplink, args=(sock, addr))</span><br><span class="line">    t.start()</span><br></pre></td></tr></table></figure>
-
-<p>需要打开两个命令行窗口，一个运行服务器程序，另外一个运行客户端程序。</p>
-
+        
+          <a class="article-more-a" href="/2019/09/17/TCP编程/#more">more >></a>
+        
       
 
       
@@ -244,37 +238,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、概念"><a href="#一、概念" class="headerlink" title="一、概念"></a>一、概念</h2><h3 id="1-进程"><a href="#1-进程" class="headerlink" title="1.进程"></a>1.进程</h3><p>第一，进程是一个实体。每一个进程都有它自己的地址空间，一般情况下，包括文本区域，数据区域和堆栈。文本区域存储处理器执行的代码；数据区域存储变量和进程执行期间使用的动态分配的内存；堆栈区域存储着活动过程调用的指令和本地变量。</p>
-<p>第二，进程是一个“执行中的程序”。程序是一个没有生命的实体，只有处理器赋予程序生命时，它才能称为一个活动的实体。</p>
-<p>进程状态：进程有三个状态，就绪、运行和阻塞。</p>
-<h3 id="2-程序"><a href="#2-程序" class="headerlink" title="2.程序"></a>2.程序</h3><p>程序是指令和数据的有序集合，是一个静态的概念。而进程是在处理机上的一次执行过程，是一个动态的概念。</p>
-<h3 id="3-线程"><a href="#3-线程" class="headerlink" title="3.线程"></a>3.线程</h3><p>通常一个进程中可以包含多个线程，但至少有一个线程。线程可以利用进程所拥有的资源，在引入线程的操作系统中，通常都把进程作为分配资源的基本单位，而线程作为独立运行和独立调度的基本单位。</p>
-<h3 id="4-多线程"><a href="#4-多线程" class="headerlink" title="4.多线程"></a>4.多线程</h3><p>在一个程序中，这些独立运行的程序片段叫做“线程”(Thread),利用它编程的概念就叫“多线程处理”。多线程是为了同步完成多项任务，不是为了提高运行效率，而是为了提高资源利用率来提高系统的效率。</p>
-<h2 id="二、进程与线程的区别"><a href="#二、进程与线程的区别" class="headerlink" title="二、进程与线程的区别"></a>二、进程与线程的区别</h2><p>1.一个程序至少有一个进程，一个进程至少有一个线程。<br>2.线程的划分尺度小于进程，使得多线程程序的并发性高。<br>3.进程在执行过程中拥有独立的内存单元，而多个线程共享内存，从而提高了程序的运行效率。<br>4.线程不能够独立执行，必须依存在应用程序中，由应用程序提供多个线程执行控制。<br>5.从逻辑的角度来看，多线程的意义在于一个应用程序中，有多个执行部分可以同时执行。但操作系统并没有将多个线程看做多个独立的应用，来实现进程的调度和管理以及资源分配。</p>
-<h2 id="三、优缺点"><a href="#三、优缺点" class="headerlink" title="三、优缺点"></a>三、优缺点</h2><p>线程执行开销小，但不利于资源的管理和保护；而进程刚好相反</p>
-<h2 id="四、通信方式"><a href="#四、通信方式" class="headerlink" title="四、通信方式"></a>四、通信方式</h2><p>1.进程</p>
-<ul>
-<li>管道(pipe):管道是一种半双工的通信方式，数据只能单向流动，而且只能在具有亲缘关系的进程间使用。进程的沁园关系通常是指父子进程关系。</li>
-<li>有名管道(namepipe):半双工的通信方式，允许无亲缘关系进程间的通信。</li>
-<li>信号量(semaphore):信号量是一个计数器，可以用来控制多个进程对共享资源的访问。它常作为一种锁机制，防止某进程正在访问共享资源时，其他进程也访问该资源。因此，主要作为进程间以及同一进程内不同线程之间的同步手段。</li>
-<li>消息队列(messagequeue):消息队列是有消息的链表，存放在内核中并由消息队列标识符标识。消息队列克服了信号传递信息少、管道只能承载无格式字节流以及缓冲区大小受限等缺点。</li>
-<li>信号(signal):信号是一种比较复杂的通信方式，用于通知接收进程某个事件已经发生。</li>
-<li>共享内存(shared memory):共享内存就是映射一段能被其他进程所访问的内存，这段共享内存由一个进程创建，但多个进程都可以访问。</li>
-<li>套接字(socket):套接口也是一种进程间的通信机制，与其他通信机制不同的是，它可用于不同及其间的进程通信。</li>
-</ul>
-<p>2.线程</p>
-<ul>
-<li>锁机制:包括互斥锁、条件变量、读写锁<ul>
-<li>互斥锁提供了以排他方式防止数据结构被并发修改的方法。</li>
-<li>读写锁允许多个线程同时读共享数据，而对写操作是互斥的。</li>
-<li>条件变量可以以原子的方式阻塞进程，直到某个特定条件为真为止。对条件的测试是在互斥锁的保护下进行的。条件变量始终与互斥锁一起使用。</li>
-</ul>
-</li>
-<li>信号量机制(Semaphore):包括无名线程信号量和命名线程信号量</li>
-<li>信号机制(Signal):类似进程间的信号处理</li>
-</ul>
-<p>线程间的通信目的主要用于线程同步，所以线程没有像进程间通信中的用于数据交换的通信机制。</p>
-
+        <h2 id="一、概念"><a href="#一、概念" class="headerlink" title="一、概念"></a>一、概念</h2><h3 id="1-进程"><a href="#1-进程" class="headerlink" title="1.进程"></a>1.进程</h3>
+        
+          <a class="article-more-a" href="/2019/09/17/进程和线程的那点事/#more">more >></a>
+        
       
 
       
