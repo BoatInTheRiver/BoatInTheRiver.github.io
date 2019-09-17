@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>进程和线程的那点事 | Jzzz&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、概念1.进程">
+  <meta name="description" content="一、概念1.进程第一，进程是一个实体。每一个进程都有它自己的地址空间，一般情况下，包括文本区域，数据区域和堆栈。文本区域存储处理器执行的代码；数据区域存储变量和进程执行期间使用的动态分配的内存；堆栈区域存储着活动过程调用的指令和本地变量。 第二，进程是一个“执行中的程序”。程序是一个没有生命的实体，只有处理器赋予程序生命时，它才能称为一个活动的实体。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="进程和线程的那点事">
 <meta property="og:url" content="http://yoursite.com/2019/09/17/进程和线程的那点事/index.html">
 <meta property="og:site_name" content="Jzzz&#39;s blog">
-<meta property="og:description" content="一、概念1.进程">
+<meta property="og:description" content="一、概念1.进程第一，进程是一个实体。每一个进程都有它自己的地址空间，一般情况下，包括文本区域，数据区域和堆栈。文本区域存储处理器执行的代码；数据区域存储变量和进程执行期间使用的动态分配的内存；堆栈区域存储着活动过程调用的指令和本地变量。 第二，进程是一个“执行中的程序”。程序是一个没有生命的实体，只有处理器赋予程序生命时，它才能称为一个活动的实体。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-17T13:25:24.001Z">
+<meta property="og:updated_time" content="2019-09-17T14:06:10.265Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="进程和线程的那点事">
-<meta name="twitter:description" content="一、概念1.进程">
+<meta name="twitter:description" content="一、概念1.进程第一，进程是一个实体。每一个进程都有它自己的地址空间，一般情况下，包括文本区域，数据区域和堆栈。文本区域存储处理器执行的代码；数据区域存储变量和进程执行期间使用的动态分配的内存；堆栈区域存储着活动过程调用的指令和本地变量。 第二，进程是一个“执行中的程序”。程序是一个没有生命的实体，只有处理器赋予程序生命时，它才能称为一个活动的实体。">
   
     <link rel="alternative" href="/atom.xml" title="Jzzz&#39;s blog" type="application/atom+xml">
   
@@ -174,9 +174,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、概念"><a href="#一、概念" class="headerlink" title="一、概念"></a>一、概念</h2><h3 id="1-进程"><a href="#1-进程" class="headerlink" title="1.进程"></a>1.进程</h3><a id="more"></a>
-<p>第一，进程是一个实体。每一个进程都有它自己的地址空间，一般情况下，包括文本区域，数据区域和堆栈。文本区域存储处理器执行的代码；数据区域存储变量和进程执行期间使用的动态分配的内存；堆栈区域存储着活动过程调用的指令和本地变量。</p>
+        <h2 id="一、概念"><a href="#一、概念" class="headerlink" title="一、概念"></a>一、概念</h2><h3 id="1-进程"><a href="#1-进程" class="headerlink" title="1.进程"></a>1.进程</h3><p>第一，进程是一个实体。每一个进程都有它自己的地址空间，一般情况下，包括文本区域，数据区域和堆栈。文本区域存储处理器执行的代码；数据区域存储变量和进程执行期间使用的动态分配的内存；堆栈区域存储着活动过程调用的指令和本地变量。</p>
 <p>第二，进程是一个“执行中的程序”。程序是一个没有生命的实体，只有处理器赋予程序生命时，它才能称为一个活动的实体。</p>
+<a id="more"></a>
 <p>进程状态：进程有三个状态，就绪、运行和阻塞。</p>
 <h3 id="2-程序"><a href="#2-程序" class="headerlink" title="2.程序"></a>2.程序</h3><p>程序是指令和数据的有序集合，是一个静态的概念。而进程是在处理机上的一次执行过程，是一个动态的概念。</p>
 <h3 id="3-线程"><a href="#3-线程" class="headerlink" title="3.线程"></a>3.线程</h3><p>通常一个进程中可以包含多个线程，但至少有一个线程。线程可以利用进程所拥有的资源，在引入线程的操作系统中，通常都把进程作为分配资源的基本单位，而线程作为独立运行和独立调度的基本单位。</p>
