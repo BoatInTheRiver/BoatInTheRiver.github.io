@@ -6,15 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2019/9 | Jzzz&#39;s blog</title>
+  <title>再谈进程与线程基础知识 | Jzzz&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Jzzz&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/archives/2019/09/index.html">
+  <meta name="description" content="前言一则小故事：我们写好的一行行代码,为了让其工作起来,我们得把它送进城(进程),既然进了城里,那肯定不能乱来。城里人有城里人的规矩,城中有城管(操作系统),人家让你休息就休息,让你工作就工作,毕竟摊位(CPU)只有一个,每个人都要占这个摊位来工作,城里要工作的多的去了。所以城管为了公平起见,使用了一种策略(调度算法),给每个人一个固定的工作时间(时间片),时间到了就会通知你去休息而换另外一个人上">
+<meta property="og:type" content="article">
+<meta property="og:title" content="再谈进程与线程基础知识">
+<meta property="og:url" content="http://yoursite.com/2020/08/13/再谈进程与线程基础知识/index.html">
 <meta property="og:site_name" content="Jzzz&#39;s blog">
+<meta property="og:description" content="前言一则小故事：我们写好的一行行代码,为了让其工作起来,我们得把它送进城(进程),既然进了城里,那肯定不能乱来。城里人有城里人的规矩,城中有城管(操作系统),人家让你休息就休息,让你工作就工作,毕竟摊位(CPU)只有一个,每个人都要占这个摊位来工作,城里要工作的多的去了。所以城管为了公平起见,使用了一种策略(调度算法),给每个人一个固定的工作时间(时间片),时间到了就会通知你去休息而换另外一个人上">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-08-13T05:00:43.846Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jzzz&#39;s blog">
+<meta name="twitter:title" content="再谈进程与线程基础知识">
+<meta name="twitter:description" content="前言一则小故事：我们写好的一行行代码,为了让其工作起来,我们得把它送进城(进程),既然进了城里,那肯定不能乱来。城里人有城里人的规矩,城中有城管(操作系统),人家让你休息就休息,让你工作就工作,毕竟摊位(CPU)只有一个,每个人都要占这个摊位来工作,城里要工作的多的去了。所以城管为了公平起见,使用了一种策略(调度算法),给每个人一个固定的工作时间(时间片),时间到了就会通知你去休息而换另外一个人上">
   
     <link rel="alternative" href="/atom.xml" title="Jzzz&#39;s blog" type="application/atom+xml">
   
@@ -150,130 +154,261 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-再谈进程与线程基础知识" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      再谈进程与线程基础知识
+    </h1>
+  
+
+        
+        <a href="/2020/08/13/再谈进程与线程基础知识/" class="archive-article-date">
+  	<time datetime="2020-08-13T02:20:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-13</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>一则小故事：<br>我们写好的一行行代码,为了让其工作起来,我们得把它送进城(<strong>进程</strong>),既然进了城里,那肯定不能乱来。<br>城里人有城里人的规矩,城中有城管(<strong>操作系统</strong>),人家让你休息就休息,让你工作就工作,毕竟摊位(<strong>CPU</strong>)只有一个,每个人都要占这个摊位来工作,城里要工作的多的去了。<br>所以城管为了公平起见,使用了一种策略(<strong>调度算法</strong>),给每个人一个固定的工作时间(时间片),时间到了就会通知你去休息而换另外一个人上场工作。<br>另外,在休息时你也不能偷懒,也得记得工作做到哪了,不然下次到你工作了,你不记得工作到哪了,那还怎么继续?<br>有的人,可能还进入县城(线程)工作,这里相对轻松一些,在休息的时候,要记得东西相对较少,而且还能共享城里(<strong>线程</strong>)的资源。</p>
+<a id="more"></a>
+
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h3><p>我们编写的代码只是一个存储在硬盘的静态文件,通过编译后就会生成二进制可执行文件，当我们运行这个可执行文件后，它就会被装载到内存中，接着CPU会执行程序的每一条指令，那这个运行中的程序，就被称作进程。</p>
+<h4 id="进程的状态变迁；"><a href="#进程的状态变迁；" class="headerlink" title="进程的状态变迁；"></a>进程的状态变迁；</h4><ul>
+<li>null -&gt; 创建状态：一个新进程被创建时的第一个状态。</li>
+<li>创建状态 -&gt; 就绪状态：当进程被创建完成并初始化后，一切就绪准备运行，变为就绪态，这个过程是很快的。</li>
+<li>就绪状态 -&gt; 运行状态：处于就绪态的进程被操作系统的进程调度器选中后，就分配给CPU正式运行该进程。</li>
+<li>运行状态 -&gt; 结束状态：当进程已经运行完成或出错时，会被操作系统做结束状态处理。</li>
+<li>运行状态 -&gt; 就绪状态：处于运行状态的进程在运行过程中，由于分配的时间片用完，操作系统会把该进程变为就绪态，接着从就绪队列中选另外一个进程运行。</li>
+<li>运行状态 -&gt; 阻塞状态：当进程请求某个时间且必须等待时，例如请求I/O事件。</li>
+<li>阻塞状态 -&gt; 就绪状态：当进程要等待的事件完成时，它从阻塞状态变为就绪状态。</li>
+</ul>
+<p>还有一个状态叫挂起状态，表示进程没有占有物理内存空间，阻塞状态是等待某个事件的返回。</p>
+<p>###进程的控制结构<br>在操作系统中，是用进程控制块(preocess control block，PCB)数据结构来描述进程。<br>PCB是进程存在的唯一标识，意味着一个进程的存在，必然会有一个PCB，如果进程消失了，PCB也会随之消失。</p>
+<p>PCB包含哪些信息？</p>
+<ul>
+<li>进程描述信息<ul>
+<li>进程标识符</li>
+<li>用户标识符</li>
+</ul>
+</li>
+<li>进程控制和管理信息<ul>
+<li>进程当前状态</li>
+<li>进程优先级</li>
+</ul>
+</li>
+<li>资源分配清单<ul>
+<li>有关内存地址空间或虚拟地址空间的信息</li>
+<li>打开文件的列表和所用的I/O设备信息</li>
+</ul>
+</li>
+<li>CPU相关信息<ul>
+<li>CPU各寄存器的值，当进程被切换时，CPU的状态信息都会被保存在相应的PCB中，以便进程重新执行时，能从断点处继续执行。</li>
+</ul>
+</li>
+</ul>
+<h4 id="进程的上下文切换"><a href="#进程的上下文切换" class="headerlink" title="进程的上下文切换"></a>进程的上下文切换</h4><p>各个进程之间是共享CPU资源的，在不同的时候进程之间需要切换，让不同的进程可以在CPU执行，那么这一个进程切换到另一个进程运行，成为进程的上下文切换。</p>
+<p>CPU上下文切换：就是把前一个任务的CPU上下文(CPU寄存器和程序计数器)保存起来，然后加载到新任务的上下文到这些寄存器和程序计数器，最后再跳转到程序计数器所指的新位置，运行新任务。<br>系统内核会存储保持下来的上下文信息，当此任务再次被分配到CPU运行时，CPU会重新加载这些上下文，这样就能保证任务原来的状态不受影响，让任务看起来还是连续运行。</p>
+<p>进程是由内核管理和调度的，所以进程的切换只能发生再内核态。<br>所以，进程的上下文切换不仅包含了虚拟内存、栈、全局变量等用户空间的资源，还包括了内核堆栈、寄存器等内核空间的资源。</p>
+<p>进程上下文切换的场景：</p>
+<ul>
+<li>分配给进程的时间片用完后，就会被系统挂起，切换到其他正在等待CPU的进程运行。</li>
+<li>进程在系统资源不足(比如内存不足)时，就要等到资源满足后才可以运行，这时就会被挂起，由系统调度其他进程运行。</li>
+<li>当进程通过睡眠函数sleep这样的方法将自己主动挂起时，自然也会重新调度。</li>
+<li>当有优先级更高的进程运行时，为了保证高优先级进程的运行，当前进程就会被挂起，由高优先级进程来运行。</li>
+<li>发生硬件中断时，CPU上的进程会被中断挂起，转而执行内核中的中断服务程序。</li>
+</ul>
+<h3 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h3><p>进程是资源分配的基本单位，线程是资源调度的基本单位。<br>线程之间可以并发运行且共享相同的地址空间。<br>线程是进程当中的一条执行流程。<br>同一个进程内多个线程之间可以共享代码段、数据段、打开的文件资源，但每个线程都有独立的寄存器和栈。</p>
+<p>线程的优缺点：</p>
+<ul>
+<li>优点：<ul>
+<li>一个进程中可以同时存在多个线程</li>
+<li>各个线程之间可以并发执行</li>
+<li>各个线程之间可以共享地址空间和文件资源等</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>当进程中的一个线程崩溃后，会导致其所属进程的所有线程崩溃。</li>
+</ul>
+</li>
+</ul>
+<p>线程相比进程开销小，体现在：</p>
+<ul>
+<li>线程的创建时间比进程快，因为进程在创建过程中，还需要资源管理信息，比如内存管理信息，文件管理信息，而线程在创建过程中，不会涉及这些资源管理信息，而是共享它们。</li>
+<li>线程的终止时间比进程快，因为线程释放的资源比进程少。</li>
+<li>同一个进程内的线程切换比进程快，因为线程具有相同的地址空间(虚拟内存共享)，意味着同一个进程的线程都具有一个页表，在切换时不需要切换页表。而对于进程切换要把页表切换掉，页表切换的过程开销比较大。</li>
+<li>由于同一进程的各线程间共享内存和文件资源，这就使得线程之间的数据交互效率更高。</li>
+</ul>
+<h4 id="线程上下文切换"><a href="#线程上下文切换" class="headerlink" title="线程上下文切换"></a>线程上下文切换</h4><p>得看线程是不是属于同一个进程：</p>
+<ul>
+<li>当两个线程不属于同一个进程，切换过程和进程上下文切换一样。</li>
+<li>当两个线程属于同一个进程，因为虚拟内存是共享的，所以在切换时，虚拟内存这些资源就保持不动，只需要切换线程的私有数据(如寄存器和栈)这些不共享的数据。</li>
+</ul>
+<h3 id="调度算法"><a href="#调度算法" class="headerlink" title="调度算法"></a>调度算法</h3><ul>
+<li>先来先服务(Fisrt Come First Severd, FCFS)算法<ul>
+<li>每次从就绪队列选择最先进入队列的进程，然后一直运行，直到进程退出或被阻塞，才会继续从队列中选择第一个进程接着运行。</li>
+<li>利于长作业，不利于短作业</li>
+</ul>
+</li>
+<li>最短作业优先(Shortest Job First, SJF)调度算法<ul>
+<li>优先选择运行时间最短的进程来运行，有助于提高系统的吞吐量。</li>
+<li>利于短作业，不利于长作业</li>
+</ul>
+</li>
+<li>高响应比优先(Highest Response Ratio Next，HRRN)调度算法<ul>
+<li>优先权 = (等待时间 + 要求服务时间) / 要求服务时间</li>
+<li>如果两个进程的等待时间相同，要求的服务时间越短，响应比就越高，这样短作业容易被选中。</li>
+<li>如果两个进程的要求服务时间相同，等待时间越长，响应比就越高，兼顾到了长作业进程，当其等待时间足够长，其响应比增大，从而获得运行的机会。</li>
+</ul>
+</li>
+<li>时间片轮转(Round Robin,RR)调度算法    <ul>
+<li>每个进程被分配一个时间段，称为时间片，即允许该进程在该时间段中运行。</li>
+</ul>
+</li>
+<li>最高优先级(Highest Priority First，HPF)调度算法<ul>
+<li>非抢占式：当就绪队列中出现优先级高的进程，运行完当前进程，再选择优先级高的进程。</li>
+<li>抢占式：当就绪队列中出现优先级高的进程，当前进程挂起，调度优先级高的进程运行。</li>
+</ul>
+</li>
+<li>多级反馈队列(Multilevel Feedback Queue)调度算法<ul>
+<li>多级：表示有多个队列，每个队列的优先级从高到低，同时优先级越高时间片越短。</li>
+<li>反馈：表示如果有新的进程加入到优先级高的队列时，立刻停止当前正在运行的进程，转而运行优先级高的队列。</li>
+</ul>
+</li>
+</ul>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/17/C语言static关键字的作用/" class="archive-article-date">
-  	<time datetime="2019-09-17T14:28:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/17/C语言static关键字的作用/">C语言static关键字的作用</a>
-    </h1>
-  
+      
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/08/13/再谈进程与线程基础知识/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/17/UCP编程/" class="archive-article-date">
-  	<time datetime="2019-09-17T13:28:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-17</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/09/17/C语言static关键字的作用/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">C语言static关键字的作用</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/17/UCP编程/">UCP编程</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/17/TCP编程/" class="archive-article-date">
-  	<time datetime="2019-09-17T12:36:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/17/TCP编程/">TCP编程</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/17/进程和线程的那点事/" class="archive-article-date">
-  	<time datetime="2019-09-17T11:05:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/17/进程和线程的那点事/">进程和线程的那点事</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -296,8 +431,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
