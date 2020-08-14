@@ -6,15 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2020 | Jzzz&#39;s blog</title>
+  <title>预测NBA比赛结果 | Jzzz&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Jzzz&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/archives/2020/index.html">
+  <meta name="description" content="项目分为以下三步：  获取数据 数据分析 模型训练与预测">
+<meta property="og:type" content="article">
+<meta property="og:title" content="预测NBA比赛结果">
+<meta property="og:url" content="http://yoursite.com/2020/08/14/预测NBA比赛b结果/index.html">
 <meta property="og:site_name" content="Jzzz&#39;s blog">
+<meta property="og:description" content="项目分为以下三步：  获取数据 数据分析 模型训练与预测">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://doc.shiyanlou.com/document-uid291340labid2647timestamp1490108812711.png">
+<meta property="og:image" content="https://doc.shiyanlou.com/document-uid291340labid2647timestamp1490108823190.png">
+<meta property="og:image" content="https://doc.shiyanlou.com/document-uid291340labid2647timestamp1490108835437.png">
+<meta property="og:updated_time" content="2020-08-14T04:59:56.984Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jzzz&#39;s blog">
+<meta name="twitter:title" content="预测NBA比赛结果">
+<meta name="twitter:description" content="项目分为以下三步：  获取数据 数据分析 模型训练与预测">
+<meta name="twitter:image" content="https://doc.shiyanlou.com/document-uid291340labid2647timestamp1490108812711.png">
   
     <link rel="alternative" href="/atom.xml" title="Jzzz&#39;s blog" type="application/atom+xml">
   
@@ -150,76 +158,201 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-预测NBA比赛b结果" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      预测NBA比赛结果
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/14/预测NBA比赛b结果/" class="archive-article-date">
+
+        
+        <a href="/2020/08/14/预测NBA比赛b结果/" class="archive-article-date">
   	<time datetime="2020-08-14T02:17:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-14</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/14/预测NBA比赛b结果/">预测NBA比赛结果</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>项目分为以下三步：</p>
+<ol>
+<li>获取数据</li>
+<li>数据分析</li>
+<li>模型训练与预测<a id="more"></a>
 
-        <div class="article-info info-on-right">
-          
-          
+</li>
+</ol>
+<h3 id="获取比赛数据"><a href="#获取比赛数据" class="headerlink" title="获取比赛数据"></a>获取比赛数据</h3><ol>
+<li>进入<a href="https://www.basketball-reference.com/，在导航栏中选择Season并选择2018-2019赛季中的Summary。" target="_blank" rel="noopener">https://www.basketball-reference.com/，在导航栏中选择Season并选择2018-2019赛季中的Summary。</a></li>
+<li>进入到Summary界面后，滑动窗口找到Team Per Game Stats表格，并选择左上方的Share&amp;more，在其下拉菜单口选择Get table as CSV。</li>
+<li>复制在界面中生成的csv格式数据，并粘贴至一个文本编辑器保存为csv文件即可。</li>
+<li>按照2、3两步来依次获取Team Per Game Stats(每支队伍平均每场比赛的表现统计)、Opponent Per Game Stats(所遇到的对手平均每场比赛的统计信息)<br>和Miscellaneous Stats(综合统计数据)，后面简称为T、O和M表。</li>
+<li>在2018-2019年Schedule and result 的比赛数据中提取得到获取2018-2019常规赛九个月的比赛数据。</li>
+<li>在2019-2020年Schedule and result 的比赛数据中提取到常规赛的比赛安排。</li>
+</ol>
+<h3 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h3><p>在获取数据后，将利用每支队伍过去的的比赛情况和Elo等级分来判断每支比赛队伍的可胜概率。在评价到每支队伍过去的比赛情况时，<br>将使用到T、O和M表这三个表格的数据，并作为代表比赛中某支队伍的比赛特征。本实验目标是实现针对每场比赛，预测比赛中哪支队伍最终将会获胜，但并不是给出<br>绝对的胜败情况，而是预判胜利的队伍有多大的获胜概率。因此建立一个代表比赛的特征向量，由两支队伍以往比赛统计情况(T、O和M表)和两个队伍各自的Elo等级分构成。</p>
+<p>Elo等级分公式是根据logistic Distribution计算PK双方(A和B)对各自的胜率期望值计算公式。<br>假设A和B的当前等级分为RAR_ARA和RBR_BRB，则A对B的胜率期望值为：<br><img src="https://doc.shiyanlou.com/document-uid291340labid2647timestamp1490108812711.png" alt="image"><br>B对A的胜率期望值为：<br><img src="https://doc.shiyanlou.com/document-uid291340labid2647timestamp1490108823190.png" alt="image"><br>如果A在比赛中的真实得分SAS_ASA(胜1分，和0.5分，负0分)和他的胜率期望值EAE_AEA不同，则他的等级分要根据以下公式调整：<br><img src="https://doc.shiyanlou.com/document-uid291340labid2647timestamp1490108835437.png" alt="image"><br>因此，将用以表示某场比赛数据的特征向量(假如A和B队比赛)为：[A队Elo score，A队的T、O和M表统计数据，B队Elo score，B队的T、O和M表统计数据]</p>
+<h3 id="基于数据进行模型训练和预测"><a href="#基于数据进行模型训练和预测" class="headerlink" title="基于数据进行模型训练和预测"></a>基于数据进行模型训练和预测</h3><p>需要用到pandas、numpy、scipy和sklearn库，先引入实验相关模块。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import pandas as pd</span><br><span class="line">import math</span><br><span class="line">import csv</span><br><span class="line">import random</span><br><span class="line">import numpy as np</span><br><span class="line">from sklearn import linear_model</span><br><span class="line">from sklearn.model_selection import cross_val_score</span><br></pre></td></tr></table></figure>
 
+<p>设置回归训练时所用到的参数变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">base_elo = 1600</span><br><span class="line">team_elos = &#123;&#125;</span><br><span class="line">team_stats = &#123;&#125;</span><br><span class="line">X = []</span><br><span class="line">y = []</span><br><span class="line">folder =  &apos;./Desktop/data&apos;</span><br></pre></td></tr></table></figure>
+
+<p>开始需要初始化数据，从T、O和M表中读取数据，去除无关数据并将这三个表通过Team属性咧进行连接。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">def initialize_data(Mstat, Ostat, Tstat):</span><br><span class="line">    new_Mstat = Mstat.drop([&apos;Rk&apos;, &apos;Arena&apos;], axis=1)</span><br><span class="line">    new_Ostat = Ostat.drop([&apos;Rk&apos;, &apos;G&apos;, &apos;MP&apos;], axis=1)</span><br><span class="line">    new_Tstat = Tstat.drop([&apos;Rk&apos;, &apos;G&apos;, &apos;MP&apos;], axis=1)</span><br><span class="line">    </span><br><span class="line">    team_stats1 = pd.merge(new_Mstat, new_Ostat, how=&apos;left&apos;, on=&apos;Team&apos;)</span><br><span class="line">    team_stats1 = pd.merge(team_stats1, new_Tstat, how=&apos;left&apos;, on=&apos;Team&apos;)</span><br><span class="line">    return team_stats1.set_index(&apos;Team&apos;, inplace=False, drop=True)</span><br></pre></td></tr></table></figure>
+
+<p>获取每支队伍的Elo score等级分，在开始没有等级分时，将其赋予初始值base_elo值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">def get_elo(team):</span><br><span class="line">    try:</span><br><span class="line">        return team_elos[team]</span><br><span class="line">    except:</span><br><span class="line">        team_elos[team] = base_elo</span><br><span class="line">        return team_elos[team]</span><br></pre></td></tr></table></figure>
+
+<p>定义计算每支球队的Elo等级分函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">def calc_elo(win_team, lose_team):</span><br><span class="line">    winner_rank = get_elo(win_team)</span><br><span class="line">    loser_rank = get_elo(lose_team)</span><br><span class="line">    </span><br><span class="line">    rank_diff = winner_rank - loser_rank</span><br><span class="line">    exp = (rank_diff * -1) / 400</span><br><span class="line">    odds = 1 / (1 + math.pow(10, exp))</span><br><span class="line">    if winner_rank &lt; 2100:</span><br><span class="line">        k = 32</span><br><span class="line">    elif winner_rank &gt;= 2100 and winner_rank &lt; 2400:</span><br><span class="line">        k = 24</span><br><span class="line">    else:</span><br><span class="line">        k = 16</span><br><span class="line">    </span><br><span class="line">    new_winner_rank = round(winner_rank + (k * (1 - odds)))</span><br><span class="line">    new_loser_rank = round(loser_rank + (k * (0 - odds)))</span><br><span class="line">    return new_winner_rank, new_loser_rank</span><br></pre></td></tr></table></figure>
+
+<p>基于初始化好的统计数据和每支队伍的Elo分，建立对应201-2019年常规赛和季后赛每场比赛的数据集，并且给主场作战的队伍的Elo分加100。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">def build_dataSet(all_data):</span><br><span class="line">    print(&quot;Building data set...&quot;)</span><br><span class="line">    X = []</span><br><span class="line">    skip = 0</span><br><span class="line">    for index, row in all_data.iterrows():</span><br><span class="line">        Wteam = row[&apos;WTeam&apos;]</span><br><span class="line">        Lteam = row[&apos;LTeam&apos;]</span><br><span class="line">        </span><br><span class="line">        # 获取最初的elo或是每个队伍最初的elo值</span><br><span class="line">        team1_elo = get_elo(Wteam)</span><br><span class="line">        team2_elo = get_elo(Lteam)</span><br><span class="line">        </span><br><span class="line">        # 给主场比赛的球队加上100的elo值</span><br><span class="line">        if row[&apos;WLoc&apos;] == &apos;H&apos;:</span><br><span class="line">            team1_elo += 100</span><br><span class="line">        else:</span><br><span class="line">            team2_elo += 100</span><br><span class="line">            </span><br><span class="line">        # 把elo当作评价每个队伍的第一个特征值</span><br><span class="line">        team1_features = [team1_elo]</span><br><span class="line">        team2_features = [team2_elo]</span><br><span class="line">        </span><br><span class="line">        # 添加从basketball reference.com获取的每个队伍的统计信息</span><br><span class="line">        for key, value in team_stats.loc[Wteam].iteritems():</span><br><span class="line">            team1_features.append(value)</span><br><span class="line">        for key, value in team_stats.loc[Lteam].iteritems():</span><br><span class="line">            team2_features.append(value)</span><br><span class="line">            </span><br><span class="line">        # 将两支队伍的特征值随机的分配在每场比赛数据的左右两侧，并将对应的0/1赋给y值</span><br><span class="line">        if random.random() &gt; 0.5:</span><br><span class="line">            X.append(team1_features + team2_features)</span><br><span class="line">            y.append(0)</span><br><span class="line">        else:</span><br><span class="line">            X.append(team2_features + team1_features)</span><br><span class="line">            y.append(1)</span><br><span class="line">            </span><br><span class="line">        if skip == 0:</span><br><span class="line">            print(&apos;X&apos;, X)</span><br><span class="line">            skip = 1</span><br><span class="line">            </span><br><span class="line">        # 根据这场比赛的数据更新队伍的elo值</span><br><span class="line">        new_winner_rank, new_loser_rank = calc_elo(Wteam, Lteam)</span><br><span class="line">        team_elos[Wteam] = new_winner_rank</span><br><span class="line">        team_elos[Lteam] = new_loser_rank</span><br><span class="line">        </span><br><span class="line">    return np.nan_to_num(X), y</span><br></pre></td></tr></table></figure>
+
+<p>最终，在main函数中调用这些数据处理函数，使用sklearn的Logistic Regression方法建立回归模型。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    Mstat = pd.read_csv(folder + &apos;/15-16Miscellaneous_Stat.csv&apos;)</span><br><span class="line">    Ostat = pd.read_csv(folder + &apos;/15-16Opponent_Per_Game_Stat.csv&apos;)</span><br><span class="line">    Tstat = pd.read_csv(folder + &apos;/15-16Team_Per_Game_Stat.csv&apos;)</span><br><span class="line">    </span><br><span class="line">    team_stats = initialize_data(Mstat, Ostat, Tstat)</span><br><span class="line">    result_data = pd.read_csv(folder + &apos;/2015-2016_result.csv&apos;)</span><br><span class="line">    X, y = build_dataSet(result_data)</span><br><span class="line">    </span><br><span class="line">    print(&quot;Fitting on %d game samples..&quot; % len(X))</span><br><span class="line">    </span><br><span class="line">    model = linear_model.LogisticRegression()</span><br><span class="line">    model.fit(X, y)</span><br><span class="line">    </span><br><span class="line">    print(&quot;Doing cross-validation...&quot;)</span><br><span class="line">    print(cross_val_score(model, X, y, cv = 10, scoring=&apos;accuracy&apos;, n_jobs=-1).mean())</span><br></pre></td></tr></table></figure>
+
+<p>利用训练好的模型在2019-2020年的常规赛中进行预测。<br>利用模型对一场新的比赛进行胜负判断，并返回其胜利的概率。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">def predict_winner(team_1, team_2, model):</span><br><span class="line">    features = []</span><br><span class="line">    </span><br><span class="line">    # team1，客场队伍</span><br><span class="line">    features.append(get_elo(team_1))</span><br><span class="line">    for key, value in team_stats.loc[team_1].iteritems():</span><br><span class="line">        features.append(value)</span><br><span class="line">        </span><br><span class="line">    # team2，主场队伍</span><br><span class="line">    features.append(get_elo(team_2) + 100)</span><br><span class="line">    for key, value in team_stats.loc[team_2].iteritems():</span><br><span class="line">        features.append(value)</span><br><span class="line">        </span><br><span class="line">    features = np.nan_to_num(features)</span><br><span class="line">    return model.predict_proba([features])</span><br></pre></td></tr></table></figure>
+
+<p>在main函数中调用predict——winner函数，将预测结果输出。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">print(&apos;Predicting on new schedule...&apos;)</span><br><span class="line">schedule1617 = pd.read_csv(folder + &apos;/19-20Schedule.csv&apos;)</span><br><span class="line">result = []</span><br><span class="line">for index, row in schedule1617.iterrows():</span><br><span class="line">    team1 = row[&apos;Vteam&apos;]</span><br><span class="line">    team2 = row[&apos;Hteam&apos;]</span><br><span class="line">    pred = predict_winner(team1, team2, model)</span><br><span class="line">    prob = pred[0][0]</span><br><span class="line">    if prob &gt; 0.5:</span><br><span class="line">        winner = team1</span><br><span class="line">        loser = team2</span><br><span class="line">        result.append([winner, loser, prob])</span><br><span class="line">    else:</span><br><span class="line">        winner = team2</span><br><span class="line">        loser = team1</span><br><span class="line">        result.append([winner, loser, 1 - prob])</span><br><span class="line">        </span><br><span class="line">with open(&apos;1617Schedule.csv&apos;, &apos;w&apos;) as f:</span><br><span class="line">    writer = csv.writer(f)</span><br><span class="line">    writer.writerow([&apos;win&apos;, &apos;lose&apos;, &apos;probability&apos;])</span><br><span class="line">    writer.writerows(result)</span><br><span class="line">    print(&apos;done...&apos;)</span><br></pre></td></tr></table></figure>
+
+<p>PS：本项目是根据实验楼课程所做的</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/08/14/预测NBA比赛b结果/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/13/再谈进程与线程基础知识/" class="archive-article-date">
-  	<time datetime="2020-08-13T02:20:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-13</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/08/13/再谈进程与线程基础知识/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">再谈进程与线程基础知识</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/13/再谈进程与线程基础知识/">再谈进程与线程基础知识</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -242,8 +375,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
