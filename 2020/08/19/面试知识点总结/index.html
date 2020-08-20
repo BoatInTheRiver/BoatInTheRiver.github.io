@@ -6,15 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Jzzz&#39;s blog</title>
+  <title>面试知识点总结 | Jzzz&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Jzzz&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="Python部分本文内容主要针对python基础和进阶部分进行总结。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试知识点总结">
+<meta property="og:url" content="http://yoursite.com/2020/08/19/面试知识点总结/index.html">
 <meta property="og:site_name" content="Jzzz&#39;s blog">
+<meta property="og:description" content="Python部分本文内容主要针对python基础和进阶部分进行总结。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-08-20T07:05:44.765Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jzzz&#39;s blog">
+<meta name="twitter:title" content="面试知识点总结">
+<meta name="twitter:description" content="Python部分本文内容主要针对python基础和进阶部分进行总结。">
   
     <link rel="alternative" href="/atom.xml" title="Jzzz&#39;s blog" type="application/atom+xml">
   
@@ -150,16 +154,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-面试知识点总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-面试知识点总结" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/08/19/面试知识点总结/">面试知识点总结</a>
+    <h1 class="article-title" itemprop="name">
+      面试知识点总结
     </h1>
   
 
@@ -173,76 +175,214 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="Python部分"><a href="#Python部分" class="headerlink" title="Python部分"></a>Python部分</h2><p>本文内容主要针对python基础和进阶部分进行总结。</p>
-        
-      
+<a id="more"></a>
+<h3 id="1-输入日期，判断这一天是这一年的第几天？"><a href="#1-输入日期，判断这一天是这一年的第几天？" class="headerlink" title="1.输入日期，判断这一天是这一年的第几天？"></a>1.输入日期，判断这一天是这一年的第几天？</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import datatime</span><br><span class="line">def dayOfYear():</span><br><span class="line">    year, month, day = map(int, input().split(&apos;.&apos;))</span><br><span class="line">    date1 = datetime.date(year=year, month=month, day=day)</span><br><span class="line">    date2 = datetime.date(year=year, month=1, day=1)</span><br><span class="line">    day_num = (date1 - date2).days + 1</span><br><span class="line">    print(&apos;&#123;&#125;是&#123;&#125;年的第&#123;&#125;天&apos;.format(date1, date1.year, day_num))</span><br></pre></td></tr></table></figure>
 
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
+<h3 id="2-打乱一个排好序的list对象alist"><a href="#2-打乱一个排好序的list对象alist" class="headerlink" title="2.打乱一个排好序的list对象alist?"></a>2.打乱一个排好序的list对象alist?</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import random</span><br><span class="line">alist = [1,2,3,4,5]</span><br><span class="line">random.shuffle(alist)</span><br><span class="line">print(alist)</span><br></pre></td></tr></table></figure>
 
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/08/19/面试知识点总结/">展开全文 >></a>
-        </p>
-      
+<h3 id="3-现有字典d-‘a’-24-‘g’-52-‘i’-12-‘k’-33-请按value值进行排序？"><a href="#3-现有字典d-‘a’-24-‘g’-52-‘i’-12-‘k’-33-请按value值进行排序？" class="headerlink" title="3.现有字典d={‘a’:24, ‘g’:52, ‘i’:12, ‘k’:33},请按value值进行排序？"></a>3.现有字典d={‘a’:24, ‘g’:52, ‘i’:12, ‘k’:33},请按value值进行排序？</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sorted(d.items(), key=lambda x:x[1])</span><br></pre></td></tr></table></figure>
 
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
+<p>x[0]代表key进行排序, x[1]代表用value进行排序</p>
+<h3 id="4-字典推导式"><a href="#4-字典推导式" class="headerlink" title="4.字典推导式"></a>4.字典推导式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d = &#123;key:value for (key, value) in iterable&#125;</span><br></pre></td></tr></table></figure>
 
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
+<h3 id="5-反转字符串”aStr”"><a href="#5-反转字符串”aStr”" class="headerlink" title="5.反转字符串”aStr”"></a>5.反转字符串”aStr”</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(&quot;aStr&quot;[::-1])</span><br></pre></td></tr></table></figure>
 
+<h3 id="6-将字符串”k-1-k1-2-k2-3-k3-4”-处理成字典-k-1-k1-2-…"><a href="#6-将字符串”k-1-k1-2-k2-3-k3-4”-处理成字典-k-1-k1-2-…" class="headerlink" title="6.将字符串”k:1|k1:2|k2:3|k3:4”,处理成字典{k:1, k1:2,…}"></a>6.将字符串”k:1|k1:2|k2:3|k3:4”,处理成字典{k:1, k1:2,…}</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">s = &quot;k:1|k1:2|k2:3|k3:4&quot;</span><br><span class="line">def str2dict(s):</span><br><span class="line">    dic = &#123;&#125;</span><br><span class="line">    for iterms in s.split(&apos;|&apos;):</span><br><span class="line">        key, value = iterms.split(&apos;:&apos;)</span><br><span class="line">        dic[key] = value</span><br><span class="line">    return dic</span><br></pre></td></tr></table></figure>
 
+<h3 id="7-按alist中的元素age由大到小排序"><a href="#7-按alist中的元素age由大到小排序" class="headerlink" title="7.按alist中的元素age由大到小排序"></a>7.按alist中的元素age由大到小排序</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alist = [&#123;&apos;name&apos;:&apos;a&apos;, &apos;age&apos;:20&#125;, &#123;&apos;name&apos;:&apos;b&apos;, &apos;age&apos;:30&#125;, &#123;&apos;name&apos;:&apos;c&apos;, &apos;age&apos;:25&#125;]</span><br><span class="line">def sort_by_age(list1):</span><br><span class="line">    return sorted(alist, key=lambda x:x[&apos;age&apos;], reverse=True)</span><br></pre></td></tr></table></figure>
 
+<h3 id="8-下面代码的输出结果"><a href="#8-下面代码的输出结果" class="headerlink" title="8.下面代码的输出结果"></a>8.下面代码的输出结果</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list1 = [&apos;a&apos;, &apos;b&apos;, &apos;c&apos;, &apos;d&apos;, &apos;e&apos;]</span><br><span class="line">print(list1[10:])</span><br></pre></td></tr></table></figure>
 
-  
-    <article id="post-预测NBA比赛结果" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/08/14/预测NBA比赛结果/">预测NBA比赛结果</a>
-    </h1>
-  
+<p>输出为[],不会产生IndexError错误。如果尝试获取list[10]就会导致IndexError。</p>
+<h3 id="9-写一个列表生成式-生成一个公差为11的等差数列"><a href="#9-写一个列表生成式-生成一个公差为11的等差数列" class="headerlink" title="9.写一个列表生成式,生成一个公差为11的等差数列"></a>9.写一个列表生成式,生成一个公差为11的等差数列</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print([x*11 for x in range(10)])</span><br></pre></td></tr></table></figure>
 
-        
-        <a href="/2020/08/14/预测NBA比赛结果/" class="archive-article-date">
-  	<time datetime="2020-08-14T02:17:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>项目分为以下三步：</p>
+<h3 id="10-给定两个列表，找出相同元素和不相同元素"><a href="#10-给定两个列表，找出相同元素和不相同元素" class="headerlink" title="10.给定两个列表，找出相同元素和不相同元素"></a>10.给定两个列表，找出相同元素和不相同元素</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">list1 = [1, 2, 3]</span><br><span class="line">list2 = [3, 4, 5]</span><br><span class="line">set1 = set(list1)</span><br><span class="line">set2 = set(list2)</span><br><span class="line">print(set1&amp;set2)</span><br><span class="line">print(set1^set2)</span><br></pre></td></tr></table></figure>
+
+<h3 id="11-python新式类和经典类的区别"><a href="#11-python新式类和经典类的区别" class="headerlink" title="11.python新式类和经典类的区别"></a>11.python新式类和经典类的区别</h3><ul>
+<li>凡是python中继承了object的类都是新式类</li>
+<li>python3中只有新式类</li>
+<li>python2继承object的都是新式类,没有写父类的是经典类</li>
+<li>保持class和type的统一,对新式类的执行a.class和type(a)是一致的,对于经典类就不一样了。</li>
+<li>对于多重继承的属性搜索顺序不一样,新式类采用广度优先搜索,经典类采用深度优先搜索。</li>
+</ul>
+<h3 id="12-python中的内置的数据结构有哪几种？"><a href="#12-python中的内置的数据结构有哪几种？" class="headerlink" title="12.python中的内置的数据结构有哪几种？"></a>12.python中的内置的数据结构有哪几种？</h3><pre><code>a.整型int、长整型long、浮点型float、复数complex
+b.字符型str、列表list、元组tuple
+c.字典dic、集合set
+d.python3中没有long，只有无限精度的int</code></pre><h3 id="13-python如何实现单例模式"><a href="#13-python如何实现单例模式" class="headerlink" title="13.python如何实现单例模式"></a>13.python如何实现单例模式</h3><p>单例模式应用场景：</p>
+<ul>
+<li>资源共享：避免由于资源操作时导致性能损耗，如日志文件、应用配置等。</li>
+<li>控制资源：方便资源之间的通信，如线程池等。</li>
+</ul>
+<pre><code>1.使用装饰器
+
+def singleton(cls):
+    instances = {}
+    def wrapper(*args, **kwargs):
+        if cls not in instances:
+            instances[cls] = cls(*args, **kwargs)
+        return instances[cls]
+    return wrapper
+
+@singleton
+class Foo(object):
+    pass
+foo1 = Foo()
+foo2 = Foo()
+print(foo1 is foo2)  # True
+
+2.使用基类
+new是真正创建实例对象的方法，所以重写基类的new方法，以此保证创建对象的时候只生成一个实例
+
+class Singleton(object):
+    def __new__(cls, *args, **kwargs):
+        if not hasattr(cls, &apos;_instance&apos;):
+            cls._instance = super(Singleton, cls).__new__(cls, *args, **kwargs)
+        return cls._instance
+
+class Foo(Singleton):
+    pass
+foo1 = Foo()
+foo2 = Foo()
+print(foo1 is foo2) # True
+
+3.元类，元类是用于创建类对象的类，类对象创建实例对象时一定要调用call方法，因此在调用call时保证始终只创建一个实例即可。
+
+class Singleton(type):
+    def __call__(cls, *args, **kwargs):
+        if not hasattr(cls, &apos;_instance&apos;):
+            cls._instance = super(Singleton, cls).__call__(*args, **kwargs)
+        return cls._instance
+
+class Foo(metaclass=Singleton):
+    pass
+foo1 = Foo()
+foo2 = Foo()
+print(foo1 is foo2) # True</code></pre><h3 id="14-利用装饰器计算某个函数运行时间"><a href="#14-利用装饰器计算某个函数运行时间" class="headerlink" title="14.利用装饰器计算某个函数运行时间"></a>14.利用装饰器计算某个函数运行时间</h3><p>装饰器：本质是一个闭包函数，可以让其他函数不需要做任何代码变动的前提下增加额外功能。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import datetime</span><br><span class="line">def calculate_time(func):</span><br><span class="line">    def int_time(func):</span><br><span class="line">        start_time = datetime.datetime.now()</span><br><span class="line">        func(*args, **kwargs)</span><br><span class="line">        end_time = datetime.datetime.now()</span><br><span class="line">        total_time = (end_time - start_time).total_seconds()</span><br><span class="line">        print(total_time)</span><br><span class="line">    return int_time</span><br><span class="line">    </span><br><span class="line">@calculate</span><br><span class="line">def myfunc():</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure>
+
+<h3 id="15-python遍历列表时删除元素的正确做法"><a href="#15-python遍历列表时删除元素的正确做法" class="headerlink" title="15.python遍历列表时删除元素的正确做法"></a>15.python遍历列表时删除元素的正确做法</h3><pre><code>1.遍历在新的列表操作，删除在原列表操作
+a = [1,2,3,4,5]
+for i in a[:]:
+    if i &gt; 5:
+        pass
+    else:
+        a.remove(i)
+print(a)
+
+2.使用过滤器
+b = filter(lambda x: x&gt;5, a)
+
+3.列表解析
+b = [i for i in a if i &gt; 5]
+
+4.倒序删除，因为列表总是向前移，所以可以倒序遍历，即使后面的元素修改，还没有被遍历的元素和其索引保持不变。
+for i in range(len(a)-1, -1, -1):
+    if a[i] &gt; 5:
+        pass
+    else:
+        a.remove(a[i])</code></pre><h3 id="16-字符串操作题目"><a href="#16-字符串操作题目" class="headerlink" title="16.字符串操作题目"></a>16.字符串操作题目</h3><p>全字母短句 PANGRAM 是包含所有英文字母的句子，比如：A QUICK BROWN FOX JUMPS OVER THE LAZY DOG.<br>定义并实现一个方法 get_missing_letter, 传入一个字符串采纳数，返回参数字符串变成一个 PANGRAM 中所缺失的字符。<br>应该忽略传入字符串参数中的大小写，返回应该都是小写字符并按字母顺序排序。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def get_missing_letter(a):</span><br><span class="line">    s1 = set(&apos;abcdefghijklmnopqrstuvwxyz&apos;)</span><br><span class="line">    s2 = set(a.lower())</span><br><span class="line">    res = &apos;&apos;.join(sorted(s1 - s2))</span><br><span class="line">    return res</span><br></pre></td></tr></table></figure>
+
+<h3 id="17-可变类型和不可变类型"><a href="#17-可变类型和不可变类型" class="headerlink" title="17.可变类型和不可变类型"></a>17.可变类型和不可变类型</h3><ol>
+<li>可变类型有list、dict，不可变类型有string、number、tuple。</li>
+<li>当进行修改操作时，可变类型传递的是内存中的地址，也就是直接修改内存中的值，没有开辟新的内存。</li>
+<li>不可变类型被修改时，并没有改变原内存地址中的值，而是开辟一块新的内存，将原地址中的值复制过去，对新开辟的内存中的值进行操作。</li>
+</ol>
+<h3 id="18-is和-的区别"><a href="#18-is和-的区别" class="headerlink" title="18.is和==的区别"></a>18.is和==的区别</h3><p>is：比较的是两个对象的id是否相等，也就是比较俩对象是否为同一实例对象，是否指向同一个内存地址。<br>==：比较的是两个对象的内容是否相等，默认会调用对象的eq()方法。</p>
+<h3 id="19-求出列表所有奇数并构造新列表"><a href="#19-求出列表所有奇数并构造新列表" class="headerlink" title="19.求出列表所有奇数并构造新列表"></a>19.求出列表所有奇数并构造新列表</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = [1,2,3,4,5,6,7,8,9]</span><br><span class="line">res = [i for i in a if i % 2 == 1]</span><br></pre></td></tr></table></figure>
+
+<h3 id="20-用一行代码写出1-2-3-10248"><a href="#20-用一行代码写出1-2-3-10248" class="headerlink" title="20.用一行代码写出1+2+3+10248"></a>20.用一行代码写出1+2+3+10248</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">from functools import reduce</span><br><span class="line">// num = sum([1,2,3,10248])</span><br><span class="line">num1 = reduce(lambda x,y: x+y, [1,2,3,10248])</span><br></pre></td></tr></table></figure>
+
+<h3 id="21-Python中变量的作用域"><a href="#21-Python中变量的作用域" class="headerlink" title="21.Python中变量的作用域"></a>21.Python中变量的作用域</h3><p>函数作用域的LEGB顺序<br>L:local 函数内部作用域<br>E:enclosing 函数内部与内嵌函数之间<br>G:global 全局作用域<br>B:built-in 内置作用域</p>
+<h3 id="22-将字符串’123’转换成123，不使用内置api，如int"><a href="#22-将字符串’123’转换成123，不使用内置api，如int" class="headerlink" title="22.将字符串’123’转换成123，不使用内置api，如int()"></a>22.将字符串’123’转换成123，不使用内置api，如int()</h3><p>方法一：利用str函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def atoi(s):</span><br><span class="line">    num = 0</span><br><span class="line">    for c in s:</span><br><span class="line">        for j in range(10):</span><br><span class="line">            if c == str(j):</span><br><span class="line">                num = num * 10 + j</span><br><span class="line">    return num</span><br></pre></td></tr></table></figure>
+
+<p>方法二：利用ord函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def atoi(s):</span><br><span class="line">    num = 0</span><br><span class="line">    for c in s:</span><br><span class="line">        num = num * 10 + ord(c) - ord(&apos;0&apos;)</span><br><span class="line">    return num</span><br></pre></td></tr></table></figure>
+
+<h3 id="23-调整数组顺序使奇数位于偶数前"><a href="#23-调整数组顺序使奇数位于偶数前" class="headerlink" title="23.调整数组顺序使奇数位于偶数前"></a>23.调整数组顺序使奇数位于偶数前</h3><p>设置头尾指针</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">def exchange(nums):</span><br><span class="line">    i, j = 0, len(nums) - 1</span><br><span class="line">    while i &lt; j:</span><br><span class="line">        while i &lt; j and nums[j] % 2 == 0:</span><br><span class="line">            j -= 1</span><br><span class="line">        while i &lt; j and nums[i] % 2 == 1:</span><br><span class="line">            i += 1</span><br><span class="line">        nums[i], nums[j] = nums[j], nums[i]</span><br><span class="line">    return nums</span><br></pre></td></tr></table></figure>
+
+<h3 id="24-给定一个任意长度数组，实现一个函数"><a href="#24-给定一个任意长度数组，实现一个函数" class="headerlink" title="24.给定一个任意长度数组，实现一个函数"></a>24.给定一个任意长度数组，实现一个函数</h3><p>让所有奇数都在偶数前面，而且奇数升序排列，偶数降序排序，如字符串’1982376455’,变成’1355798642’</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def exchange(s):</span><br><span class="line">    s = [int(c) for c in s]</span><br><span class="line">    s.sort(reverse=True)</span><br><span class="line">    for i in range(len(s)):</span><br><span class="line">        if s[i] % 2 == 1:</span><br><span class="line">            s.insert(0, s.pop(i))</span><br><span class="line">    print(&apos;&apos;.join(str(e) for e in s))</span><br></pre></td></tr></table></figure>
+
+<h3 id="25-下面代码的输出结果"><a href="#25-下面代码的输出结果" class="headerlink" title="25.下面代码的输出结果"></a>25.下面代码的输出结果</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">def multi():</span><br><span class="line">    return [lambda x: i * x for i in range(4)]</span><br><span class="line">print(m(3) for m in multi())</span><br></pre></td></tr></table></figure>
+
+<p>输出结果为[9,9,9,9],原因是python闭包的后期绑定导致，即在闭包中的变量是在内部函数被调用的时候被查找的。<br>最后函数被调用时，for循环已经完成，i的值最后为3，因此每一个返回的值都是3。</p>
+<h3 id="26-python中的类方法、类实例方法、静态方法有何区别"><a href="#26-python中的类方法、类实例方法、静态方法有何区别" class="headerlink" title="26.python中的类方法、类实例方法、静态方法有何区别"></a>26.python中的类方法、类实例方法、静态方法有何区别</h3><p>类方法:是类对象的方法，在定义时需要在上方使用@classmethod进行装饰，新参为cls，表示类对象，类对象和实例对象都可调用。</p>
+<p>类实例方法:是类实例化对象的方法，只有实例对象可以调用，形参为self，指代对象本身。</p>
+<p>静态方法:是任意函数，在其上方使用@staticmethod进行装饰，类对象和实例对象都可调用。</p>
+<h3 id="27-python内存溢出的原因，如何处理"><a href="#27-python内存溢出的原因，如何处理" class="headerlink" title="27.python内存溢出的原因，如何处理"></a>27.python内存溢出的原因，如何处理</h3><p>内存溢出:</p>
+<ul>
+<li>内存中加载的数据量过于庞大，如一次从数据库取出过多数据</li>
+<li>集合类中有对对象的引用，使用完后未清空，产生堆积</li>
+<li>代码存在死循环或者循环产生过多重复对象实体</li>
+<li>使用第三方软件中的BUG</li>
+<li>启动参数内存值设定的过小</li>
+</ul>
+<p>解决办法:</p>
+<p>第一步:修改JVM启动参数，直接增加内存。(-Xms，-Xmx参数一定不要忘记加)</p>
+<p>第二步:检查错误日志，查看”OutOfMemory”错误前是否有其他异常或错误。</p>
+<p>第三步:对代码进行调查和分析，找出可能存在内存溢出的位置。</p>
+<h3 id="28-python的内存管理机制及调优手段"><a href="#28-python的内存管理机制及调优手段" class="headerlink" title="28.python的内存管理机制及调优手段"></a>28.python的内存管理机制及调优手段</h3><p>内存管理机制:引用计数、垃圾回收、内存池</p>
+<p>引用计数:是一种非常高校的内存管理手段，当一个python对象被引用时其引用计数增加1，当前不再被一个变量引用则计数减1，当引用计数等于0时对象被删除。</p>
+<p>垃圾回收:</p>
+<ul>
+<li>引用计数</li>
+<li>标记清除:遍历以对象为节点，以引用为边构成的图有向图，把所有可以访问到的对象打上标记，然后清扫一遍内存空间，把没有标记的对象释放。</li>
+<li>分代回收:将系统中的内存块根据其存活时间划分为不同的集合，每个集合就是一个代，垃圾收集频率随代的存活时间的增大而减小。</li>
+</ul>
+<p>调优手段:<br>1.手动垃圾回收<br>2.调高垃圾回收阈值<br>3.避免循环引用</p>
+<h3 id="29-内存泄露是什么，如何避免"><a href="#29-内存泄露是什么，如何避免" class="headerlink" title="29.内存泄露是什么，如何避免"></a>29.内存泄露是什么，如何避免</h3><p>内存泄露是指由于疏忽或错误造成程序未能释放已经不再使用的内存，并非指物理上的消失，而是应用程序分配某段内存后，由于设计错误，<br>导致在释放该段内存之前就失去了对该段内存的控制，从而造成内存的浪费。</p>
+<p>可以通过sys.getrefcount(obj)来获取对象的引用计数，并根据返回值是否为0来判断是否内存泄露。</p>
+<h3 id="30-简述read、readline和readlines的区别"><a href="#30-简述read、readline和readlines的区别" class="headerlink" title="30.简述read、readline和readlines的区别"></a>30.简述read、readline和readlines的区别</h3><p>read:读取整个文件</p>
+<p>readline:读取下一行</p>
+<p>readlines:读取整个文件到一个迭代器以供遍历</p>
+<h3 id="31-什么是Hash-散列函数"><a href="#31-什么是Hash-散列函数" class="headerlink" title="31.什么是Hash(散列函数)"></a>31.什么是Hash(散列函数)</h3><p>Hash，一般翻译为散列或哈希，是把任意长度的输入通过散列算法变换成固定长度的输出，该输出就是散列值。<br>这种转换是一种压缩映射，即散列值的空间通常远小于输入的空间，不同的输入可能会散列成相同的输出。</p>
+<p>处理哈希冲突的办法:</p>
+<ul>
+<li>开放寻址法：Hi = (H(key) + di) mod m,其中H(key)为散列函数，m为散列表长，di为增量序列。</li>
+<li>再散列法</li>
+<li>链地址法(拉链法)</li>
+</ul>
+<h3 id="32-python函数重载机制"><a href="#32-python函数重载机制" class="headerlink" title="32.python函数重载机制"></a>32.python函数重载机制</h3><p>函数重载主要是为了解决两个问题：<br>1.可变参数类型<br>2.可变参数个数</p>
+<p>对于情况1，函数功能相同但是参数类型不同，python不需要处理，因为python可以接受任何类型的参数。<br>对于情况2，函数功能相同但是参数个数不同，python对那些缺少的参数设定为缺省参数即可解决问题。</p>
+<p>所以，python不需要函数重载。</p>
+<h3 id="32-递归函数停止的条件"><a href="#32-递归函数停止的条件" class="headerlink" title="32.递归函数停止的条件"></a>32.递归函数停止的条件</h3><p>递归的终止条件一般定义在函数内部，在递归调用前要做一个条件判断，根据判断的结果选择是继续调用自身还是return，返回终止递归。</p>
+<h3 id="33-对面向对象的理解"><a href="#33-对面向对象的理解" class="headerlink" title="33.对面向对象的理解"></a>33.对面向对象的理解</h3><p>面向对象是相对于面向过程而言的，面向过程是一种基于功能分析，以算法为中心的程序设计方法，而面向对象是一种基于结构分析的，以数据为中心的<br>程序设计思想。在面向对象中有一个很重要的东西就是类。面向对象有三大特性：封装、继承和多态。</p>
+<h3 id="34-僵尸进程和孤儿进程，怎么避免僵尸进程"><a href="#34-僵尸进程和孤儿进程，怎么避免僵尸进程" class="headerlink" title="34.僵尸进程和孤儿进程，怎么避免僵尸进程"></a>34.僵尸进程和孤儿进程，怎么避免僵尸进程</h3><p>孤儿进程：父进程退出，子进程还在运行的这些子进程都是孤儿进程，孤儿进程将被init进程所收养，并由init进程对它们完成状态收集工作。</p>
+<p>僵尸进程：进程使用fork创建子进程，如果子进程退出，而父进程并没有调用wait或waitpid获取子进程的状态信息，那么子进程的进程描述符仍然保存在系统中的这些进程是僵尸进程。</p>
+<p>避免僵尸进程的方法：</p>
 <ol>
-<li>获取数据</li>
-<li>数据分析</li>
-<li>模型训练与预测
-        
+<li>fork两次用孙子进程完成子进程的任务</li>
+<li>用wait()函数使父进程阻塞</li>
+<li>使用信号量，在signal handler中调用waitpid，这样父进程不用阻塞</li>
+</ol>
+<h3 id="34-python中的进程与线程的使用场景"><a href="#34-python中的进程与线程的使用场景" class="headerlink" title="34.python中的进程与线程的使用场景"></a>34.python中的进程与线程的使用场景</h3><p>多进程适合在cpu密集型操作(cpu操作指令多，比如位数多的浮点运算)<br>多线程适合在IO密集型操作(读写数据操作比较多，比如爬虫)</p>
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -251,16 +391,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/08/14/预测NBA比赛结果/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/08/19/面试知识点总结/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2020/08/14/预测NBA比赛结果/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">预测NBA比赛结果</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -280,325 +479,14 @@
 
 
 
-
   
-    <article id="post-再谈进程与线程基础知识" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/08/13/再谈进程与线程基础知识/">再谈进程与线程基础知识</a>
-    </h1>
   
 
-        
-        <a href="/2020/08/13/再谈进程与线程基础知识/" class="archive-article-date">
-  	<time datetime="2020-08-13T02:20:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>一则小故事：<br>我们写好的一行行代码,为了让其工作起来,我们得把它送进城(<strong>进程</strong>),既然进了城里,那肯定不能乱来。<br>城里人有城里人的规矩,城中有城管(<strong>操作系统</strong>),人家让你休息就休息,让你工作就工作,毕竟摊位(<strong>CPU</strong>)只有一个,每个人都要占这个摊位来工作,城里要工作的多的去了。<br>所以城管为了公平起见,使用了一种策略(<strong>调度算法</strong>),给每个人一个固定的工作时间(时间片),时间到了就会通知你去休息而换另外一个人上场工作。<br>另外,在休息时你也不能偷懒,也得记得工作做到哪了,不然下次到你工作了,你不记得工作到哪了,那还怎么继续?<br>有的人,可能还进入县城(线程)工作,这里相对轻松一些,在休息的时候,要记得东西相对较少,而且还能共享城里(<strong>线程</strong>)的资源。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/08/13/再谈进程与线程基础知识/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-C语言static关键字的作用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/17/C语言static关键字的作用/">C语言static关键字的作用</a>
-    </h1>
   
 
-        
-        <a href="/2019/09/17/C语言static关键字的作用/" class="archive-article-date">
-  	<time datetime="2019-09-17T14:28:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在C语言中，static主要定义全局静态变量、局部静态变量、静态函数。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/17/C语言static关键字的作用/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-UCP编程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/17/UCP编程/">UCP编程</a>
-    </h1>
   
 
-        
-        <a href="/2019/09/17/UCP编程/" class="archive-article-date">
-  	<time datetime="2019-09-17T13:28:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>TCP是建立可靠连接，并且通信双方可以以流的形式发送数据。相对TCP,UDP则是面向无连接的协议。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/17/UCP编程/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-TCP编程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/17/TCP编程/">TCP编程</a>
-    </h1>
-  
-
-        
-        <a href="/2019/09/17/TCP编程/" class="archive-article-date">
-  	<time datetime="2019-09-17T12:36:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>1.客户端</p>
-<p>大多数连接都是可靠的TCP连接。创建TCP连接时，主动发起连接的叫客户端，被动响应连接的叫服务器。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/17/TCP编程/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-进程和线程的那点事" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/17/进程和线程的那点事/">进程和线程的那点事</a>
-    </h1>
-  
-
-        
-        <a href="/2019/09/17/进程和线程的那点事/" class="archive-article-date">
-  	<time datetime="2019-09-17T11:05:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、概念"><a href="#一、概念" class="headerlink" title="一、概念"></a>一、概念</h2><h3 id="1-进程"><a href="#1-进程" class="headerlink" title="1.进程"></a>1.进程</h3><p>第一，进程是一个实体。每一个进程都有它自己的地址空间，一般情况下，包括文本区域，数据区域和堆栈。文本区域存储处理器执行的代码；数据区域存储变量和进程执行期间使用的动态分配的内存；堆栈区域存储着活动过程调用的指令和本地变量。</p>
-<p>第二，进程是一个“执行中的程序”。程序是一个没有生命的实体，只有处理器赋予程序生命时，它才能称为一个活动的实体。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/17/进程和线程的那点事/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
 
 
@@ -621,8 +509,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
