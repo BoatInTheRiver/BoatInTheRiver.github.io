@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Jzzz&#39;s blog">
 <meta property="og:description" content="Python部分本文内容主要针对python基础和进阶部分进行总结。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-08-20T07:05:44.765Z">
+<meta property="og:updated_time" content="2020-09-17T04:17:31.716Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试知识点总结">
 <meta name="twitter:description" content="Python部分本文内容主要针对python基础和进阶部分进行总结。">
@@ -284,7 +284,7 @@ for i in range(len(a)-1, -1, -1):
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def get_missing_letter(a):</span><br><span class="line">    s1 = set(&apos;abcdefghijklmnopqrstuvwxyz&apos;)</span><br><span class="line">    s2 = set(a.lower())</span><br><span class="line">    res = &apos;&apos;.join(sorted(s1 - s2))</span><br><span class="line">    return res</span><br></pre></td></tr></table></figure>
 
 <h3 id="17-可变类型和不可变类型"><a href="#17-可变类型和不可变类型" class="headerlink" title="17.可变类型和不可变类型"></a>17.可变类型和不可变类型</h3><ol>
-<li>可变类型有list、dict，不可变类型有string、number、tuple。</li>
+<li>可变类型有list、dict，set，不可变类型有string、number、tuple。</li>
 <li>当进行修改操作时，可变类型传递的是内存中的地址，也就是直接修改内存中的值，没有开辟新的内存。</li>
 <li>不可变类型被修改时，并没有改变原内存地址中的值，而是开辟一块新的内存，将原地址中的值复制过去，对新开辟的内存中的值进行操作。</li>
 </ol>
@@ -309,7 +309,7 @@ for i in range(len(a)-1, -1, -1):
 <h3 id="25-下面代码的输出结果"><a href="#25-下面代码的输出结果" class="headerlink" title="25.下面代码的输出结果"></a>25.下面代码的输出结果</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">def multi():</span><br><span class="line">    return [lambda x: i * x for i in range(4)]</span><br><span class="line">print(m(3) for m in multi())</span><br></pre></td></tr></table></figure>
 
 <p>输出结果为[9,9,9,9],原因是python闭包的后期绑定导致，即在闭包中的变量是在内部函数被调用的时候被查找的。<br>最后函数被调用时，for循环已经完成，i的值最后为3，因此每一个返回的值都是3。</p>
-<h3 id="26-python中的类方法、类实例方法、静态方法有何区别"><a href="#26-python中的类方法、类实例方法、静态方法有何区别" class="headerlink" title="26.python中的类方法、类实例方法、静态方法有何区别"></a>26.python中的类方法、类实例方法、静态方法有何区别</h3><p>类方法:是类对象的方法，在定义时需要在上方使用@classmethod进行装饰，新参为cls，表示类对象，类对象和实例对象都可调用。</p>
+<h3 id="26-python中的类方法、类实例方法、静态方法有何区别"><a href="#26-python中的类方法、类实例方法、静态方法有何区别" class="headerlink" title="26.python中的类方法、类实例方法、静态方法有何区别"></a>26.python中的类方法、类实例方法、静态方法有何区别</h3><p>类方法:是类对象的方法，在定义时需要在上方使用@classmethod进行装饰，形参为cls，表示类对象，类对象和实例对象都可调用。</p>
 <p>类实例方法:是类实例化对象的方法，只有实例对象可以调用，形参为self，指代对象本身。</p>
 <p>静态方法:是任意函数，在其上方使用@staticmethod进行装饰，类对象和实例对象都可调用。</p>
 <h3 id="27-python内存溢出的原因，如何处理"><a href="#27-python内存溢出的原因，如何处理" class="headerlink" title="27.python内存溢出的原因，如何处理"></a>27.python内存溢出的原因，如何处理</h3><p>内存溢出:</p>
@@ -325,11 +325,11 @@ for i in range(len(a)-1, -1, -1):
 <p>第二步:检查错误日志，查看”OutOfMemory”错误前是否有其他异常或错误。</p>
 <p>第三步:对代码进行调查和分析，找出可能存在内存溢出的位置。</p>
 <h3 id="28-python的内存管理机制及调优手段"><a href="#28-python的内存管理机制及调优手段" class="headerlink" title="28.python的内存管理机制及调优手段"></a>28.python的内存管理机制及调优手段</h3><p>内存管理机制:引用计数、垃圾回收、内存池</p>
-<p>引用计数:是一种非常高校的内存管理手段，当一个python对象被引用时其引用计数增加1，当前不再被一个变量引用则计数减1，当引用计数等于0时对象被删除。</p>
+<p>引用计数:是一种非常高效的内存管理手段，当一个python对象被引用时其引用计数增加1，当前不再被一个变量引用则计数减1，当引用计数等于0时对象被删除。</p>
 <p>垃圾回收:</p>
 <ul>
 <li>引用计数</li>
-<li>标记清除:遍历以对象为节点，以引用为边构成的图有向图，把所有可以访问到的对象打上标记，然后清扫一遍内存空间，把没有标记的对象释放。</li>
+<li>标记清除:遍历以对象为节点，以引用为边构成的有向图，把所有可以访问到的对象打上标记，然后清扫一遍内存空间，把没有标记的对象释放。</li>
 <li>分代回收:将系统中的内存块根据其存活时间划分为不同的集合，每个集合就是一个代，垃圾收集频率随代的存活时间的增大而减小。</li>
 </ul>
 <p>调优手段:<br>1.手动垃圾回收<br>2.调高垃圾回收阈值<br>3.避免循环引用</p>
